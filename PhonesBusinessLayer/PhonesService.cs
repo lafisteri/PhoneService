@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using PhonesBusinessLayer.DTOs;
+using PhonesCore.Enums;
 using PhonesCore.Models;
 using PhonesDataLayer;
 
@@ -19,6 +22,26 @@ namespace PhonesBusinessLayer
             await Task.CompletedTask;
 
             return _phonesRepository.GetAllPhones();
+        }
+
+        public async Task<Guid> CreatePhone(PhoneDTO phoneDTO)
+        {
+            await Task.CompletedTask;
+            if(Enum.TryParse(typeof(Color), phoneDTO.Color, out var color))
+            {
+                var phone = new Phone
+                {
+                    Model = phoneDTO.Model,
+                    IsEsim = phoneDTO.IsEsim,
+                    DisplayDiagonal = phoneDTO.DisplayDiagonal,
+                    PresentationDay = phoneDTO.PresentationDay,
+                    Color = (Color)color
+                };
+
+                return _phonesRepository.CreatePhone(phone);
+            }
+
+            return Guid.Empty;
         }
     }
 }

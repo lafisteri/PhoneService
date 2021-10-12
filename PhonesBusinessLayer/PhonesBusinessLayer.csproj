@@ -8,4 +8,10 @@
     <ProjectReference Include="..\PhonesDataLayer\PhonesDataLayer.csproj" />
     <ProjectReference Include="..\PhonesCore\PhonesCore.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="DTOs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
 </Project>

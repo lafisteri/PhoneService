@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PhonesCore.Models;
 
 namespace PhonesDataLayer
@@ -15,6 +16,14 @@ namespace PhonesDataLayer
         public List<Phone> GetAllPhones()
         {
             return _phones;
+        }
+
+        public Guid CreatePhone(Phone phone)
+        {
+            phone.Id = Guid.NewGuid();
+            _phones.Add(phone);
+
+            return phone.Id;
         }
     }
 }

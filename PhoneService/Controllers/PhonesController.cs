@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PhonesBusinessLayer;
+using PhonesBusinessLayer.DTOs;
+using PhonesCore.Models;
 
 namespace PhoneService.Controllers
 {
@@ -20,6 +23,19 @@ namespace PhoneService.Controllers
         {
             var items = await _phonesService.GetAllPhones();
             return Ok(items);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePhone(PhoneDTO phone)
+        {
+            var guid = await _phonesService.CreatePhone(phone);
+
+            if(guid != Guid.Empty)
+            {
+                return Ok(guid);
+            }
+
+            return BadRequest();
         }
     }
 }

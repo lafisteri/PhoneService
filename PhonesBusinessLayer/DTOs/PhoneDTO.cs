@@ -1,15 +1,13 @@
 ﻿using System;
-using PhonesCore.Enums;
 
-namespace PhonesCore.Models
+namespace PhonesBusinessLayer.DTOs
 {
-    public class Phone
+    public class PhoneDTO
     {
-        public Guid Id { get; set; }
         public string Model { get; set; }
         public bool IsEsim { get; set; }
         public float DisplayDiagonal { get; set; }
-        public Color Color { get; set; }
+        public string Color { get; set; }
         public DateTime PresentationDay { get; set; }
     }
 }
