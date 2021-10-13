@@ -37,7 +37,7 @@ namespace PhonesDataLayer
             var oldPhone = _phones.FirstOrDefault(x => x.Id == phone.Id);
             if (oldPhone != null)
             {
-                var index = _phones.IndexOf(phone);
+                var index = _phones.IndexOf(oldPhone);
 
                 _phones[index] = phone;
 
