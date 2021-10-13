@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PhonesBusinessLayer;
 
-namespace PhoneService
+namespace PhonePresentationLayer
 {
     public class Startup
     {
@@ -17,6 +18,8 @@ namespace PhoneService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPhonesService, PhonesService>();
+
             services.AddControllers();
         }
 
