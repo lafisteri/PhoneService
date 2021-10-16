@@ -10,11 +10,11 @@ namespace PhonePresentationLayer.Controllers
     [Route("[controller]")]
     public class PhonesController : ControllerBase
     {
-        private static IPhonesService _phonesService;
+        private readonly IPhonesService _phonesService;
 
-        public PhonesController()
+        public PhonesController(IPhonesService phonesService)
         {
-            _phonesService = new PhonesService();
+            _phonesService = phonesService;
         }
 
         [HttpGet]

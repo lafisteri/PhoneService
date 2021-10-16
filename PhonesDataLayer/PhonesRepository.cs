@@ -5,7 +5,7 @@ using PhonesCore.Models;
 
 namespace PhonesDataLayer
 {
-    public class PhonesRepository
+    public class PhonesRepository : IPhonesRepository
     {
         private static List<Phone> _phones;
 
@@ -21,7 +21,12 @@ namespace PhonesDataLayer
 
         public Phone GetById(Guid id)
         {
-            return _phones.FirstOrDefault(x => x.Id == id);
+            if (id != null)
+            {
+                return _phones.FirstOrDefault(x => x.Id == id);
+            }
+
+            return null;
         }
 
         public Guid CreatePhone(Phone phone)
@@ -50,7 +55,10 @@ namespace PhonesDataLayer
         public Phone DeletePhone(Guid id)
         {
             var oldPhone = _phones.FirstOrDefault(x => x.Id == id);
-            _phones.Remove(oldPhone);
+            if (oldPhone != null)
+            {
+                _phones.Remove(oldPhone);
+            }
 
             return oldPhone;
         }

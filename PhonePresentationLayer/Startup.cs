@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhonesBusinessLayer;
+using PhonesDataLayer;
 
 namespace PhonePresentationLayer
 {
@@ -19,6 +20,7 @@ namespace PhonePresentationLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IPhonesService, PhonesService>();
+            services.AddScoped<IPhonesRepository, PhonesRepository>();
 
             services.AddControllers();
         }

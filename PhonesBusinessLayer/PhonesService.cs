@@ -10,11 +10,11 @@ namespace PhonesBusinessLayer
 {
     public class PhonesService : IPhonesService
     {
-        private static PhonesRepository _phonesRepository;
+        private static IPhonesRepository _phonesRepository;
 
-        static PhonesService()
+        public PhonesService(IPhonesRepository phonesRepository)
         {
-            _phonesRepository = new PhonesRepository();
+            _phonesRepository = phonesRepository;
         }
 
         public async Task<IEnumerable<Phone>> GetAllPhones()
