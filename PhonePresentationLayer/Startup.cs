@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PhonesBusinessLayer;
+using PhonesBusinessLayer.MapperProfile;
 using PhonesDataLayer;
 
 namespace PhonePresentationLayer
@@ -19,6 +21,14 @@ namespace PhonePresentationLayer
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var assemblies = new[]
+    {
+                Assembly.GetAssembly(typeof(PhoneProfile))
+            };
+
+            services.AddAutoMapper(assemblies);
+
             services.AddScoped<IPhonesService, PhonesService>();
             services.AddScoped<IPhonesRepository, PhonesRepository>();
 

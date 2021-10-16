@@ -6,10 +6,10 @@ namespace PhonesDataLayer
 {
     public interface IPhonesRepository
     {
-        Guid CreatePhone(Phone phone);
-        Phone DeletePhone(Guid id);
-        List<Phone> GetAllPhones();
-        Phone GetById(Guid id);
-        Phone UpdatePhone(Phone phone);
+        Guid Create(Phone phone);
+        Phone Delete(Guid id);
+        List<Phone> Get();
+        Phone Get(Guid id);
+        Phone Update(Phone phone);
     }
 }

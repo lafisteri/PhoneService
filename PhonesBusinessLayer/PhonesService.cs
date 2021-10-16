@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using PhonesBusinessLayer.DTOs;
 using PhonesCore.Enums;
 using PhonesCore.Models;
@@ -10,42 +11,37 @@ namespace PhonesBusinessLayer
 {
     public class PhonesService : IPhonesService
     {
+        private static IMapper _mapper;
         private static IPhonesRepository _phonesRepository;
 
-        public PhonesService(IPhonesRepository phonesRepository)
+        public PhonesService(IPhonesRepository phonesRepository, IMapper mapper)
         {
             _phonesRepository = phonesRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<Phone>> GetAllPhones()
         {
             await Task.CompletedTask;
 
-            return _phonesRepository.GetAllPhones();
+            return _phonesRepository.Get();
         }
 
         public async Task<Phone> GetById(Guid id)
         {
             await Task.CompletedTask;
 
-            return _phonesRepository.GetById(id);
+            return _phonesRepository.Get(id);
         }
 
         public async Task<Guid> CreatePhone(PhoneDTO phoneDTO)
         {
             await Task.CompletedTask;
-            if (Enum.TryParse(typeof(Color), phoneDTO.Color, out var color))
-            {
-                var phone = new Phone
-                {
-                    Model = phoneDTO.Model,
-                    IsEsim = phoneDTO.IsEsim,
-                    DisplayDiagonal = phoneDTO.DisplayDiagonal,
-                    PresentationDay = phoneDTO.PresentationDay,
-                    Color = (Color)color
-                };
 
-                return _phonesRepository.CreatePhone(phone);
+            var phone = _mapper.Map<Phone>(phoneDTO);
+            if (phone != null)
+            {
+                return _phonesRepository.Create(phone);
             }
 
             return Guid.Empty;
@@ -55,19 +51,11 @@ namespace PhonesBusinessLayer
         {
             await Task.CompletedTask;
 
-            if (Enum.TryParse(typeof(Color), phoneDTO.Color, out var color))
+            var phone = _mapper.Map<Phone>(phoneDTO);
+            if (phone != null)
             {
-                var phone = new Phone
-                {
-                    Id = id,
-                    Model = phoneDTO.Model,
-                    IsEsim = phoneDTO.IsEsim,
-                    DisplayDiagonal = phoneDTO.DisplayDiagonal,
-                    PresentationDay = phoneDTO.PresentationDay,
-                    Color = (Color)color
-                };
-
-                return _phonesRepository.UpdatePhone(phone);
+                phone.Id = id;
+                return _phonesRepository.Update(phone);
             }
 
             return null;
@@ -77,7 +65,7 @@ namespace PhonesBusinessLayer
         {
             await Task.CompletedTask;
 
-            return _phonesRepository.DeletePhone(id);
+            return _phonesRepository.Delete(id);
         }
 
     }

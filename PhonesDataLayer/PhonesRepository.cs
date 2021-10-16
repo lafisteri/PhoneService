@@ -14,12 +14,12 @@ namespace PhonesDataLayer
             _phones = new List<Phone>();
         }
 
-        public List<Phone> GetAllPhones()
+        public List<Phone> Get()
         {
             return _phones;
         }
 
-        public Phone GetById(Guid id)
+        public Phone Get(Guid id)
         {
             if (id != null)
             {
@@ -29,7 +29,7 @@ namespace PhonesDataLayer
             return null;
         }
 
-        public Guid CreatePhone(Phone phone)
+        public Guid Create(Phone phone)
         {
             phone.Id = Guid.NewGuid();
             _phones.Add(phone);
@@ -37,7 +37,7 @@ namespace PhonesDataLayer
             return phone.Id;
         }
 
-        public Phone UpdatePhone(Phone phone)
+        public Phone Update(Phone phone)
         {
             var oldPhone = _phones.FirstOrDefault(x => x.Id == phone.Id);
             if (oldPhone != null)
@@ -52,7 +52,7 @@ namespace PhonesDataLayer
             return null;
         }
 
-        public Phone DeletePhone(Guid id)
+        public Phone Delete(Guid id)
         {
             var oldPhone = _phones.FirstOrDefault(x => x.Id == id);
             if (oldPhone != null)
