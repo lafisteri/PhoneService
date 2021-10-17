@@ -21,14 +21,13 @@ namespace PhonePresentationLayer
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             var assemblies = new[]
-    {
+            {
                 Assembly.GetAssembly(typeof(PhoneProfile))
             };
-
             services.AddAutoMapper(assemblies);
 
+            services.AddDbContext<Context>();
             services.AddScoped<IPhonesService, PhonesService>();
             services.AddScoped<IPhonesRepository, PhonesRepository>();
 

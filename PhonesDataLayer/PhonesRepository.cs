@@ -1,66 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using PhonesCore.Models;
 
 namespace PhonesDataLayer
 {
     public class PhonesRepository : IPhonesRepository
     {
-        private static List<Phone> _phones;
+        private readonly Context _dbContext;
 
-        static PhonesRepository()
+        public PhonesRepository(Context dbContext)
         {
-            _phones = new List<Phone>();
+            _dbContext = dbContext;
         }
 
-        public List<Phone> Get()
+        public async Task<List<Phone>> GetAsync()
         {
-            return _phones;
+            return await _dbContext.Phone.ToListAsync();
         }
 
-        public Phone Get(Guid id)
+        public async Task<Phone> GetAsync(Guid id)
         {
             if (id != null)
             {
-                return _phones.FirstOrDefault(x => x.Id == id);
+                return await _dbContext.Phone.FirstOrDefaultAsync(x => x.Id == id);
             }
 
             return null;
         }
 
-        public Guid Create(Phone phone)
+        public async Task<Guid> CreateAsync(Phone phone)
         {
             phone.Id = Guid.NewGuid();
-            _phones.Add(phone);
+            await _dbContext.Phone.AddAsync(phone);
+            await _dbContext.SaveChangesAsync();
 
             return phone.Id;
         }
 
-        public Phone Update(Phone phone)
+        public async Task<Phone> UpdateAsync(Phone phone)
         {
-            var oldPhone = _phones.FirstOrDefault(x => x.Id == phone.Id);
-            if (oldPhone != null)
+            var result = _dbContext.Phone.SingleOrDefault(p => p.Id == phone.Id);
+            if (result != null)
             {
-                var index = _phones.IndexOf(oldPhone);
-
-                _phones[index] = phone;
-
+                _dbContext.Entry(result).CurrentValues.SetValues(phone);
+                await _dbContext.SaveChangesAsync();
                 return phone;
             }
 
             return null;
+
+
+            //_dbContext.Attach(phone);
+            //_dbContext.Entry(phone).State = EntityState.Modified;
+            //await _dbContext.SaveChangesAsync();
+
+            //return phone;
         }
 
-        public Phone Delete(Guid id)
+        public async Task<Phone> DeleteAsync(Guid id)
         {
-            var oldPhone = _phones.FirstOrDefault(x => x.Id == id);
-            if (oldPhone != null)
+            var entity = await GetAsync(id);
+            if (entity != null)
             {
-                _phones.Remove(oldPhone);
+                _dbContext.Phone.Remove(entity);
+                await _dbContext.SaveChangesAsync();
             }
 
-            return oldPhone;
+            return entity;
         }
     }
 }

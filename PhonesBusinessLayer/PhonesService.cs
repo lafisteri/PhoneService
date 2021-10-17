@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using PhonesBusinessLayer.DTOs;
-using PhonesCore.Enums;
 using PhonesCore.Models;
 using PhonesDataLayer;
 
@@ -22,26 +21,20 @@ namespace PhonesBusinessLayer
 
         public async Task<IEnumerable<Phone>> GetAllPhones()
         {
-            await Task.CompletedTask;
-
-            return _phonesRepository.Get();
+            return await _phonesRepository.GetAsync();
         }
 
         public async Task<Phone> GetById(Guid id)
         {
-            await Task.CompletedTask;
-
-            return _phonesRepository.Get(id);
+            return await _phonesRepository.GetAsync(id);
         }
 
         public async Task<Guid> CreatePhone(PhoneDTO phoneDTO)
         {
-            await Task.CompletedTask;
-
             var phone = _mapper.Map<Phone>(phoneDTO);
             if (phone != null)
             {
-                return _phonesRepository.Create(phone);
+                return await _phonesRepository.CreateAsync(phone);
             }
 
             return Guid.Empty;
@@ -49,13 +42,11 @@ namespace PhonesBusinessLayer
 
         public async Task<Phone> UpdatePhone(Guid id, PhoneDTO phoneDTO)
         {
-            await Task.CompletedTask;
-
             var phone = _mapper.Map<Phone>(phoneDTO);
             if (phone != null)
             {
                 phone.Id = id;
-                return _phonesRepository.Update(phone);
+                return await _phonesRepository.UpdateAsync(phone);
             }
 
             return null;
@@ -63,10 +54,7 @@ namespace PhonesBusinessLayer
 
         public async Task<Phone> DeletePhone(Guid id)
         {
-            await Task.CompletedTask;
-
-            return _phonesRepository.Delete(id);
+            return await _phonesRepository.DeleteAsync(id);
         }
-
     }
 }
