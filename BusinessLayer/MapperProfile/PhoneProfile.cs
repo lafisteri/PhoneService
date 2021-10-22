@@ -12,7 +12,7 @@ namespace BusinessLayer.MapperProfile
         {
             CreateMap<PhoneDTO, Phone>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(x => x.ColorId, opt => opt.MapFrom(src => ToCategory(src.Color)))
+                .ForMember(x => x.Color, opt => opt.MapFrom(src => ToCategory(src.Color)))
                 .ForMember(x => x.Model, opt => opt.MapFrom(src => src.Model))
                 .ForMember(x => x.IsEsim, opt => opt.MapFrom(src => src.IsEsim))
                 .ForMember(x => x.DisplayDiagonal, opt => opt.MapFrom(src => src.DisplayDiagonal))

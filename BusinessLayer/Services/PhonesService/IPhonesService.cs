@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Core.Models;
 using BusinessLayer.DTOs;
 
-namespace BusinessLayer.Abstract
+namespace BusinessLayer.Services.PhonesService
 {
     public interface IPhonesService
     {

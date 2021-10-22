@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
 
-namespace DataLayer
+namespace DataLayer.PhonesRepository
 {
     public interface IPhonesRepository
     {

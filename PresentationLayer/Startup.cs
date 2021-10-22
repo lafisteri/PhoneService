@@ -1,15 +1,20 @@
 ﻿using System.Reflection;
-using BusinessLayer;
-using BusinessLayer.Abstract;
 using BusinessLayer.MapperProfile;
+using BusinessLayer.Services.AuthService;
+using BusinessLayer.Services.HashService;
+using BusinessLayer.Services.PhonesService;
+using BusinessLayer.Services.UserService;
 using Core.Models;
 using DataLayer;
+using DataLayer.PhonesRepository;
+using DataLayer.UserRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PresentationLayer
 {
@@ -30,14 +35,14 @@ namespace PresentationLayer
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidIssuer = authOptions.Issuer,
                         ValidateAudience = true,
                         ValidAudience = authOptions.Audience,
                         ValidateLifetime = true,
-                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey
+                        IssuerSigningKey = new SymmetricSecurityKey
                             (System.Text.Encoding.ASCII.GetBytes(authOptions.SecretKey)),
                         ValidateIssuerSigningKey = true
                     };
@@ -49,10 +54,14 @@ namespace PresentationLayer
             };
             services.AddAutoMapper(assemblies);
 
-            services.AddDbContext<Context>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPhonesService, PhonesService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IHashService, HashService>();
+
+            services.AddDbContext<Context>();
             services.AddScoped<IPhonesRepository, PhonesRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddControllers();
         }

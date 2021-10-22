@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Core.Models;
 using BusinessLayer.DTOs;
-using DataLayer;
-using BusinessLayer.Abstract;
+using DataLayer.PhonesRepository;
 
-namespace BusinessLayer
+namespace BusinessLayer.Services.PhonesService
 {
     public class PhonesService : IPhonesService
     {

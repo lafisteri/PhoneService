@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Core.Models;
 
-namespace DataLayer
+namespace DataLayer.PhonesRepository
 {
     public class PhonesRepository : IPhonesRepository
     {

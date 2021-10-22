@@ -9,13 +9,21 @@
     <None Remove="AutoMapper" />
     <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
     <None Remove="MapperProfile\" />
-    <None Remove="Abstract\" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Services\" />
+    <None Remove="Services\AuthService\" />
+    <None Remove="Services\PhonesService\" />
+    <None Remove="Services\UserService\" />
+    <None Remove="Services\HashService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
     <Folder Include="MapperProfile\" />
-    <Folder Include="Abstract\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\AuthService\" />
+    <Folder Include="Services\PhonesService\" />
+    <Folder Include="Services\UserService\" />
+    <Folder Include="Services\HashService\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />

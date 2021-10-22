@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using Core.Enums;
 
 namespace Core.Models
 {
@@ -9,7 +11,8 @@ namespace Core.Models
         public string Model { get; set; }
         public bool IsEsim { get; set; }
         public float DisplayDiagonal { get; set; }
-        public int ColorId { get; set; }
+        [Column("ColorId")]
+        public Color Color { get; set; }
         public DateTime PresentationDay { get; set; }
     }
 }

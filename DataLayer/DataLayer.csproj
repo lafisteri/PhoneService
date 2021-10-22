@@ -9,6 +9,8 @@
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite.Core" />
     <None Remove="Entities\" />
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="IUserRepository\" />
+    <None Remove="PhonesRepository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
@@ -19,6 +21,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
+    <Folder Include="UserRepository\" />
+    <Folder Include="PhonesRepository\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />

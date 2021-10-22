@@ -8,7 +8,7 @@ namespace DataLayer
     {
         public DbSet<Phone> Phone { get; set; }
         public DbSet<Entities.Color> Color { get; set; }
-
+        public DbSet<AccountInfo> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,6 +28,16 @@ namespace DataLayer
             {
                 entity.HasKey(p => p.Id);
             });
+
+            modelBuilder.Entity<AccountInfo>()
+                .OwnsOne(accountInfo => accountInfo.LoginInfo,
+                nawigationBuilder =>
+                {
+                    nawigationBuilder.Property(loginInfo => loginInfo.Login)
+                        .HasColumnName("Login");
+                    nawigationBuilder.Property(loginInfo => loginInfo.Password)
+                        .HasColumnName("Password");
+                });
         }
     }
 }
