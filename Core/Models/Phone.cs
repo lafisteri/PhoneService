@@ -10,7 +10,7 @@ namespace Core.Models
         public Guid Id { get; set; }
         public string Model { get; set; }
         public bool IsEsim { get; set; }
-        public float DisplayDiagonal { get; set; }
+        public double DisplayDiagonal { get; set; }
         [Column("ColorId")]
         public Color Color { get; set; }
         public DateTime PresentationDay { get; set; }

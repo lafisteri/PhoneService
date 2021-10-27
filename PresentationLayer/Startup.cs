@@ -11,6 +11,7 @@ using DataLayer.UserRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -59,7 +60,11 @@ namespace PresentationLayer
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashService, HashService>();
 
-            services.AddDbContext<Context>();
+            services.AddDbContext<ContextSqLite>();
+
+            services.AddDbContext<ContextMsSql>(options =>
+                options.UseSqlServer(Configuration["ConnectionStrings:Default"]));
+
             services.AddScoped<IPhonesRepository, PhonesRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
