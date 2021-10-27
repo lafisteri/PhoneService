@@ -4,7 +4,7 @@ using Core.Models;
 
 namespace DataLayer
 {
-    public class Context : DbContext
+    public class ContextSqLite : DbContext
     {
         public DbSet<Phone> Phone { get; set; }
         public DbSet<Entities.Color> Color { get; set; }

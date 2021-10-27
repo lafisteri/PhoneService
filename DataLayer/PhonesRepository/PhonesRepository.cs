@@ -8,23 +8,23 @@ namespace DataLayer.PhonesRepository
 {
     public class PhonesRepository : IPhonesRepository
     {
-        private readonly Context _dbContext;
+        private readonly ContextMsSql _dbContext;
 
-        public PhonesRepository(Context dbContext)
+        public PhonesRepository(ContextMsSql dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<List<Phone>> GetAsync()
         {
-            return await _dbContext.Phone.ToListAsync();
+            return await _dbContext.Phones.ToListAsync();
         }
 
         public async Task<Phone> GetAsync(Guid id)
         {
             if (id != null)
             {
-                return await _dbContext.Phone.FirstOrDefaultAsync(x => x.Id == id);
+                return await _dbContext.Phones.FirstOrDefaultAsync(x => x.Id == id);
             }
 
             return null;
@@ -33,7 +33,7 @@ namespace DataLayer.PhonesRepository
         public async Task<Guid> CreateAsync(Phone phone)
         {
             phone.Id = Guid.NewGuid();
-            await _dbContext.Phone.AddAsync(phone);
+            await _dbContext.Phones.AddAsync(phone);
             await _dbContext.SaveChangesAsync();
 
             return phone.Id;
@@ -53,7 +53,7 @@ namespace DataLayer.PhonesRepository
             var entity = await GetAsync(id);
             if (entity != null)
             {
-                _dbContext.Phone.Remove(entity);
+                _dbContext.Phones.Remove(entity);
                 await _dbContext.SaveChangesAsync();
             }
 

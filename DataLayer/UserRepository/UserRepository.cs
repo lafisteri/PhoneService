@@ -7,9 +7,9 @@ namespace DataLayer.UserRepository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly Context _dbContext;
+        private readonly ContextSqLite _dbContext;
 
-        public UserRepository(Context dbContext)
+        public UserRepository(ContextSqLite dbContext)
         {
             _dbContext = dbContext;
         }
