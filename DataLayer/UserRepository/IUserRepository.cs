@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Core.Enums;
 using Core.Models;
 
@@ -9,5 +10,6 @@ namespace DataLayer.UserRepository
         Task<Role?> GetRoleByLoginInfoAsync(LoginInfo loginInfo);
         Task UpdatePasswordAsync(LoginInfo loginInfo);
         Task<bool> VerifyLoginInfoAsync(LoginInfo loginInfo);
+        Task<Guid> AddUserAsync(AccountInfo accountInfo);
     }
 }

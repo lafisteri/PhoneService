@@ -3,6 +3,7 @@ using BusinessLayer.MapperProfile;
 using BusinessLayer.Services.AuthService;
 using BusinessLayer.Services.HashService;
 using BusinessLayer.Services.PhonesService;
+using BusinessLayer.Services.RegistrationService;
 using BusinessLayer.Services.UserService;
 using Core.Models;
 using DataLayer;
@@ -59,6 +60,7 @@ namespace PresentationLayer
             services.AddScoped<IPhonesService, PhonesService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashService, HashService>();
+            services.AddScoped<IRegistrationService, RegistrationService>();
 
             services.AddDbContext<ContextSqLite>();
 

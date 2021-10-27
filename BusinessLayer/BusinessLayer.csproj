@@ -15,6 +15,8 @@
     <None Remove="Services\PhonesService\" />
     <None Remove="Services\UserService\" />
     <None Remove="Services\HashService\" />
+    <None Remove="Services\RegistrationService\" />
+    <None Remove="Services\SmtpService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
@@ -24,6 +26,8 @@
     <Folder Include="Services\PhonesService\" />
     <Folder Include="Services\UserService\" />
     <Folder Include="Services\HashService\" />
+    <Folder Include="Services\RegistrationService\" />
+    <Folder Include="Services\SmtpService\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />

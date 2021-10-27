@@ -1,11 +1,15 @@
 ﻿using System.Threading.Tasks;
+using BusinessLayer.DTOs;
 using BusinessLayer.Services.AuthService;
+using BusinessLayer.Services.RegistrationService;
 using BusinessLayer.Services.UserService;
 using Core.Enums;
 using Core.Models;
 using Core.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
 
 namespace PresentationLayer.Controllers
 {
@@ -15,11 +19,19 @@ namespace PresentationLayer.Controllers
     {
         private readonly IAuthService _authService;
         private readonly IUserService _userService;
+        private readonly ILogger<AccountsController> _logger;
+        private readonly IRegistrationService _registrationService;
 
-        public AccountsController(IAuthService authService, IUserService userService)
+
+        public AccountsController(IAuthService authService,
+            IUserService userService,
+            ILogger<AccountsController> logger,
+            IRegistrationService registrationService)
         {
             _authService = authService;
             _userService = userService;
+            _logger = logger;
+            _registrationService = registrationService;
         }
 
         [HttpPost("login")]
@@ -33,10 +45,12 @@ namespace PresentationLayer.Controllers
                     Login = loginInfo.Login,
                     Role = userRole.Value
                 });
+                _logger.LogInformation($"User logged in {loginInfo.Login} !");
 
                 return Ok(token);
             }
 
+            _logger.LogWarning($"User login failed: {loginInfo}");
             return BadRequest("Invalid username or password.");
         }
 
@@ -64,6 +78,12 @@ namespace PresentationLayer.Controllers
             }
 
             return BadRequest("Invalid login or password!");
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(AccountInfoDTO accountInfo)
+        {
+            return Ok(await _registrationService.RegisterUserAsync(accountInfo));
         }
     }
 }

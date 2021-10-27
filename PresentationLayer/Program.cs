@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace PresentationLayer
 {
@@ -15,6 +16,8 @@ namespace PresentationLayer
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseSerilog((context, _, configuration) => configuration
+                .ReadFrom.Configuration(context.Configuration));
     }
 }

@@ -8,10 +8,12 @@
     <None Remove="Models\" />
     <None Remove="Enums\" />
     <None Remove="Requests\" />
+    <None Remove="Options\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Enums\" />
     <Folder Include="Requests\" />
+    <Folder Include="Options\" />
   </ItemGroup>
 </Project>

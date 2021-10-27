@@ -7,6 +7,7 @@ namespace DataLayer
     {
         public DbSet<Phone> Phones { get; set; }
         public DbSet<AccountInfo> Users { get; set; }
+        public DbSet<Email> Emails { get; set; }
 
         public ContextMsSql(DbContextOptions<ContextMsSql> options) : base(options)
         {

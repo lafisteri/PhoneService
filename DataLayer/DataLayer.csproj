@@ -12,6 +12,7 @@
     <None Remove="IUserRepository\" />
     <None Remove="PhonesRepository\" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="EmailRepository\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.11">
@@ -25,6 +26,7 @@
     <Folder Include="Entities\" />
     <Folder Include="UserRepository\" />
     <Folder Include="PhonesRepository\" />
+    <Folder Include="EmailRepository\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />

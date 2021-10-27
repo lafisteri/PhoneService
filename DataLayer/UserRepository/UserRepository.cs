@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Core.Enums;
 using Core.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +8,21 @@ namespace DataLayer.UserRepository
 {
     public class UserRepository : IUserRepository
     {
-        private readonly ContextSqLite _dbContext;
+        private readonly ContextMsSql _dbContext;
 
-        public UserRepository(ContextSqLite dbContext)
+        public UserRepository(ContextMsSql dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<Guid> AddUserAsync(AccountInfo accountInfo)
+        {
+            accountInfo.Id = Guid.NewGuid();
+            _dbContext.Users.Add(accountInfo);
+
+            var result = await _dbContext.SaveChangesAsync();
+
+            return result != 0 ? accountInfo.Id : Guid.Empty;
         }
 
         public async Task<Role?> GetRoleByLoginInfoAsync(LoginInfo loginInfo)
