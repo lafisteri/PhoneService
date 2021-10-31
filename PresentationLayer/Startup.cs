@@ -4,9 +4,11 @@ using BusinessLayer.Services.AuthService;
 using BusinessLayer.Services.HashService;
 using BusinessLayer.Services.PhonesService;
 using BusinessLayer.Services.RegistrationService;
+using BusinessLayer.Services.SmtpService;
 using BusinessLayer.Services.UserService;
 using Core.Models;
 using DataLayer;
+using DataLayer.EmailRepository;
 using DataLayer.PhonesRepository;
 using DataLayer.UserRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -61,6 +63,8 @@ namespace PresentationLayer
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IHashService, HashService>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<ISmtpService, SmtpServiceMock>();
+            services.AddScoped<IEmailRepository, EmailRepository>();
 
             services.AddDbContext<ContextSqLite>();
 
