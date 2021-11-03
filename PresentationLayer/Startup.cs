@@ -33,6 +33,10 @@ namespace PresentationLayer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
+            services.AddHttpContextAccessor();
+
+
             services.Configure<AuthOptions>(Configuration.GetSection(nameof(AuthOptions)));
             var authOptions = Configuration.GetSection(nameof(AuthOptions)).Get<AuthOptions>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -89,6 +93,7 @@ namespace PresentationLayer
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }
